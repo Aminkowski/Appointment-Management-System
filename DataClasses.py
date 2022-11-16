@@ -5,23 +5,29 @@ class Btree:
         self.r = right
 
     def __repr__ (self):
-        return " %s \n l: { %s }  r: [ %s ] " % (self.v, self.l, self.r)
+        return " %s l: { %s }  r: [ %s ] " % (self.v, self.l, self.r)
 
 
 #    def span(tree):
 #        if nul tree: 
     def locate (self, location):
         if location == []:
+            print("A")
             if self == None:
+                print("AA")
                 return "end node"
             else:
+                print("AB", self.v)
                 return self.v
         elif self == None:
+            print("Z")
             return "out of tree"
         elif location[0]==0:
-            self.l.locate (location[1:])
+            print("B")
+            (self.l).locate (location[1:])
         elif location[0]==1:
-            self.r.locate (location[1:])
+            print("C")
+            (self.r).locate (location[1:])
         else: 
             print("uh, trouble?:" , tree, location)
 
@@ -54,6 +60,12 @@ node1 = Btree(1)
 node2 = Btree(2)
 Tree1 = Btree(0, node1, node2) 
 Tree2 = Btree(-1, Tree1, Tree1)
+print(Tree2)
+print(Tree2.locate([]) ) 
+print(Tree2.locate([0]) )
+print(Tree2.locate([1]) )
+print(Tree2.locate([0,1]) )
+print(Tree2.locate([1,0]) )
 # note to self: python isn't immutable. 
 # furthermore: modifying Tree1's children modifies node1 / node 2, not just Tree1. 
 # OKAY. so. Radd and Ladd change the tree. 
